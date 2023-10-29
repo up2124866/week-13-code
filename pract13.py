@@ -1,32 +1,42 @@
 from tkinter import *
 
 
-class MathQuiz:
+class Question:
+    def __init__(self, question, answer):
+        self.question = question
+        self.answer = answer
+
+    def getQuestion(self):
+        return self.question
+
+    def checkAnswer(self, userAnswer):
+        return self.answer == userAnswer
+
+
+class Quiz:
     def __init__(self):
         self.questions = []
-        self.answers = []
 
     def addQuestion(self, question, answer):
-        self.questions.append(question)
-        self.answers.append(answer)
+        newQuestion = Question(question, answer)
+        self.questions.append(newQuestion)
+
+    def removeQuestionAt(self, index):
+        del self.questions[index]
 
     def getQuestionAt(self, index):
-        return self.questions[index]
+        return self.questions[index].getQuestion()
 
-    def getAnswerAt(self, index):
-        return self.answers[index]
+    def checkAnswerAt(self, index, userAnswer):
+        return self.questions[index].checkAnswer(userAnswer)
 
     def getNumQuestions(self):
         return len(self.questions)
 
-    def removeQuestionAt(self, index):
-        del self.questions[index]
-        del self.answers[index]
 
-
-class MathQuizApp:
-    def __init__(self, mathQuiz):
-        self.mathQuiz = mathQuiz
+class QuizApp:
+    def __init__(self, quiz):
+        self.quiz = quiz
 
         self.root = Tk()
         self.root.title("Math Quiz")
@@ -46,30 +56,51 @@ class MathQuizApp:
     def createWidgets(self):
         self.deleteAllQuestionWidgets()
 
-        questionEntry = Entry(self.mainFrame, textvariable=self.newQuestion)
+        questionEntry = Entry(
+            self.mainFrame,
+            textvariable=self.newQuestion,
+            width=15
+        )
         questionEntry.grid(row=0, column=0)
 
-        answerEntry = Entry(self.mainFrame, textvariable=self.newAnswer)
+        answerEntry = Entry(
+            self.mainFrame,
+            textvariable=self.newAnswer,
+            width=15
+        )
         answerEntry.grid(row=0, column=1)
 
-        addQuestionButton = Button(self.mainFrame, text="Add Question", command=self.addQuestion)
+        addQuestionButton = Button(
+            self.mainFrame,
+            text="Add",
+            command=self.addQuestion
+        )
         addQuestionButton.grid(row=0, column=2)
 
-        numQuestions = self.mathQuiz.getNumQuestions()
+        numQuestions = self.quiz.getNumQuestions()
+
         for i in range(numQuestions):
-            question = self.mathQuiz.getQuestionAt(i)
-            questionLabel = Label(self.mainFrame, text=question)
+            question = self.quiz.getQuestionAt(i)
+
+            questionLabel = Label(
+                self.mainFrame,
+                text=question
+            )
             questionLabel.grid(row=i+1, column=0)
             self.questionWidgets.append(questionLabel)
 
-            studentAnswer = Entry(self.mainFrame)
-            studentAnswer.grid(row=i+1, column=1)
-            self.questionWidgets.append(studentAnswer)
+            userAnswer = Entry(self.mainFrame)
+            userAnswer.grid(
+                row=i+1,
+                column=1
+            )
+            self.questionWidgets.append(userAnswer)
 
             checkButton = Button(
                 self.mainFrame,
                 text="Check",
-                command=lambda i=i, studentAnswer=studentAnswer: self.checkAnswer(i, studentAnswer)
+                command=lambda i=i, userAnswer=userAnswer: self.checkAnswer(
+                    i, userAnswer)
             )
             checkButton.grid(row=i+1, column=2)
             self.questionWidgets.append(checkButton)
@@ -85,18 +116,19 @@ class MathQuizApp:
     def addQuestion(self):
         question = self.newQuestion.get()
         answer = self.newAnswer.get()
-        self.mathQuiz.addQuestion(question, answer)
+        self.quiz.addQuestion(question, answer)
         self.createWidgets()
 
-    def checkAnswer(self, index, studentAnswer):
-        correctAnswer = self.mathQuiz.getAnswerAt(index)
-        if studentAnswer.get() == correctAnswer:
-            print("Correct!")
+    def checkAnswer(self, index, userAnswer):
+        answer = userAnswer.get()
+        correct = self.quiz.checkAnswerAt(index, answer)
+        if correct:
+            userAnswer.configure(bg="green")
         else:
-            print("Incorrect!")
+            userAnswer.configure(bg="red")
 
     def removeQuestion(self, index):
-        self.mathQuiz.removeQuestionAt(index)
+        self.quiz.removeQuestionAt(index)
         self.createWidgets()
 
     def deleteAllQuestionWidgets(self):
@@ -105,11 +137,11 @@ class MathQuizApp:
 
 
 def main():
-    quiz = MathQuiz()
+    quiz = Quiz()
     quiz.addQuestion("What's 2+2?", "4")
     quiz.addQuestion("What's 3*3?", "9")
 
-    app = MathQuizApp(quiz)
+    app = QuizApp(quiz)
     app.run()
 
 
