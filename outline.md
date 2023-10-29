@@ -3,15 +3,11 @@
     - Brief overview of Tkinter and event-driven programming
     - A revisit of `Button`, `Label`, `Entry`, and their respective properties.
     - Quick review of basic event handlers and the `command` parameter.
-
-2. **Introduction to Other Widgets**
-    - Brief overview of the `Checkbutton` (tick boxes) widget and its use cases.
-    - How to capture its state and use it.
   
-3. **Introduction to Advanced Event-Driven Concepts**
+2. **Introduction to Advanced Event-Driven Concepts**
     - Introducing the Model-View-Controller (MVC) pattern in GUIs using examples such as:
         - Coffee shop queue management system
-        - Maths quiz app
+        - Quiz app
 
 ## **Chapter 2: Dynamic Widgets and Programmatic Interaction**
 1. **Programmatic Addition and Removal of Widgets**
