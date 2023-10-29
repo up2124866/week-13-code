@@ -42,10 +42,12 @@ class QuizApp:
         self.root.title("Math Quiz")
 
         self.mainFrame = Frame(self.root)
-        self.mainFrame.grid(row=0, column=0)
+        self.mainFrame.grid(row=0, column=0, padx=10, pady=10)
 
         self.newQuestion = StringVar()
         self.newAnswer = StringVar()
+        self.newQuestion.set("Enter question here")
+        self.newAnswer.set("Enter answer here")
 
         self.questionWidgets = []
 
@@ -59,23 +61,38 @@ class QuizApp:
         questionEntry = Entry(
             self.mainFrame,
             textvariable=self.newQuestion,
-            width=15
+            width=20
         )
-        questionEntry.grid(row=0, column=0)
+        questionEntry.grid(
+            row=0,
+            column=0,
+            padx=5,
+            pady=5
+        )
 
         answerEntry = Entry(
             self.mainFrame,
             textvariable=self.newAnswer,
-            width=15
+            width=20
         )
-        answerEntry.grid(row=0, column=1)
+        answerEntry.grid(
+            row=0,
+            column=1,
+            padx=5,
+            pady=5
+        )
 
         addQuestionButton = Button(
             self.mainFrame,
             text="Add",
             command=self.addQuestion
         )
-        addQuestionButton.grid(row=0, column=2)
+        addQuestionButton.grid(
+            row=0,
+            column=2,
+            padx=5,
+            pady=5
+        )
 
         numQuestions = self.quiz.getNumQuestions()
 
@@ -92,7 +109,9 @@ class QuizApp:
             userAnswer = Entry(self.mainFrame)
             userAnswer.grid(
                 row=i+1,
-                column=1
+                column=1,
+                padx=5,
+                pady=5
             )
             self.questionWidgets.append(userAnswer)
 
@@ -110,7 +129,12 @@ class QuizApp:
                 text="Remove",
                 command=lambda index=i: self.removeQuestion(index)
             )
-            removeQuestionButton.grid(row=i+1, column=3)
+            removeQuestionButton.grid(
+                row=i+1,
+                column=3,
+                padx=5,
+                pady=5
+            )
             self.questionWidgets.append(removeQuestionButton)
 
     def addQuestion(self):
