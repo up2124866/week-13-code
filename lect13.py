@@ -40,7 +40,7 @@ class CoffeeShopApp:
         self.root.mainloop()
 
     def createWidgets(self):
-        self.deleteAllWidgets()
+        self.deleteAllCustomerWidgets()
 
         customerEntry = Entry(
             self.mainFrame,
@@ -94,7 +94,7 @@ class CoffeeShopApp:
         self.coffeeShop.removeCustomerAt(index)
         self.createWidgets()
 
-    def deleteAllWidgets(self):
+    def deleteAllCustomerWidgets(self):
         for widget in self.customerWidgets:
             widget.destroy()
         # Alternatively, we could do this:
