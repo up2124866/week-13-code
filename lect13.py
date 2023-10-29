@@ -53,7 +53,7 @@ class CoffeeShopApp:
 
         addCustomerButton = Button(
             self.mainFrame,
-            text="Add Customer",
+            text="Add",
             command=self.addCustomer
         )
         addCustomerButton.grid(
