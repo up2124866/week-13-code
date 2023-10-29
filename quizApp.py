@@ -1,5 +1,5 @@
 from tkinter import *
-from quiz import *
+from quiz import Quiz
 
 
 class QuizApp:
