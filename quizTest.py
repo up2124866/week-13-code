@@ -1,18 +1,16 @@
 from tkinter import *
+from quiz import Quiz
 
 
 class QuizApp:
-    def __init__(self):
+    def __init__(self, quiz):
+        self.quiz = quiz
+
         self.root = Tk()
         self.root.title("Math Quiz")
 
         self.mainFrame = Frame(self.root)
-        self.mainFrame.grid(
-            row=0,
-            column=0,
-            padx=10,
-            pady=10
-        )
+        self.mainFrame.grid(row=0, column=0, padx=10, pady=10)
 
         self.newQuestion = StringVar()
         self.newAnswer = StringVar()
@@ -60,34 +58,40 @@ class QuizApp:
             pady=5
         )
 
+        numQuestions = self.quiz.getNumQuestions()
+
+        for i in range(numQuestions):
+            question = self.quiz.getQuestionAt(i)
+
+            questionLabel = Label(
+                self.mainFrame,
+                text=question,
+                padx=5,
+                pady=5
+            )
+            questionLabel.grid(row=i+1, column=0)
+
+            userAnswer = Entry(self.mainFrame)
+            userAnswer.grid(
+                row=i+1,
+                column=1,
+                padx=5,
+                pady=5
+            )
+
+
     def addQuestion(self):
         question = self.newQuestion.get()
-
-        questionLabel = Label(
-            self.mainFrame,
-            text=question
-        )
-        questionLabel.grid(
-            row=1,
-            column=0,
-            padx=5,
-            pady=5
-        )
-
-        answerEntry = Entry(
-            self.mainFrame,
-            width=20,
-        )
-        answerEntry.grid(
-            row=1,
-            column=1,
-            padx=5,
-            pady=5
-        )
-
+        answer = self.newAnswer.get()
+        self.quiz.addQuestion(question, answer)
+        self.createWidgets()
 
 def main():
-    app = QuizApp()
+    quiz = Quiz()
+    quiz.addQuestion("What's 2+2?", "4")
+    quiz.addQuestion("What's 3*3?", "9")
+
+    app = QuizApp(quiz)
     app.run()
 
 
