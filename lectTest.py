@@ -57,8 +57,8 @@ class CoffeeShopApp:
             column=1,
         )
 
-        numberOfCustomers = self.coffeeShop.getNumCustomers()
-        for i in range(numberOfCustomers):
+        numCustomers = self.coffeeShop.getNumCustomers()
+        for i in range(numCustomers):
             customer = self.coffeeShop.getCustomerAt(i)
             customerLabel = Label(
                 self.mainFrame,
