@@ -6,10 +6,10 @@ class QuizApp:
     def __init__(self, quiz):
         self.quiz = quiz
 
-        self.root = Tk()
-        self.root.title("Math Quiz")
+        self.win = Tk()
+        self.win.title("Math Quiz")
 
-        self.mainFrame = Frame(self.root)
+        self.mainFrame = Frame(self.win)
         self.mainFrame.grid(row=0, column=0, padx=10, pady=10)
 
         self.newQuestion = StringVar()
@@ -19,7 +19,7 @@ class QuizApp:
 
     def run(self):
         self.createWidgets()
-        self.root.mainloop()
+        self.win.mainloop()
 
     def createWidgets(self):
         questionEntry = Entry(
