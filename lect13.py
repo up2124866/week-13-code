@@ -22,10 +22,10 @@ class CoffeeShopApp:
     def __init__(self, coffeeShop):
         self.coffeeShop = coffeeShop
 
-        self.root = Tk()
-        self.root.title("Coffee Shop")
+        self.win = Tk()
+        self.win.title("Coffee Shop")
 
-        self.mainFrame = Frame(self.root)
+        self.mainFrame = Frame(self.win)
         self.mainFrame.grid(
             row=0,
             column=0,
@@ -37,7 +37,7 @@ class CoffeeShopApp:
 
     def run(self):
         self.createWidgets()
-        self.root.mainloop()
+        self.win.mainloop()
 
     def createWidgets(self):
         self.deleteAllCustomerWidgets()
