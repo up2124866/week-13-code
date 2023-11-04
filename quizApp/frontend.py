@@ -109,6 +109,9 @@ class QuizApp:
         question = self.newQuestion.get()
         answer = self.newAnswer.get()
         self.quiz.addQuestion(question, answer)
+
+        self.newQuestion.set("Enter question here")
+        self.newAnswer.set("Enter answer here")
         self.createWidgets()
 
     def checkAnswer(self, index, userAnswer):
