@@ -1,21 +1,5 @@
 from tkinter import *
-
-
-class CoffeeShop:
-    def __init__(self):
-        self.customers = []
-
-    def addCustomer(self, name):
-        self.customers.append(name)
-
-    def removeCustomerAt(self, index):
-        del self.customers[index]
-
-    def getCustomerAt(self, index):
-        return self.customers[index]
-
-    def getNumCustomers(self):
-        return len(self.customers)
+from backend import CoffeeShop
 
 
 class CoffeeShopApp:
@@ -29,6 +13,8 @@ class CoffeeShopApp:
         self.mainFrame.grid(
             row=0,
             column=0,
+            padx=10,  # Optional padding to make the GUI look nicer
+            pady=10,
         )
 
         self.newCustomerName = StringVar()
@@ -49,6 +35,8 @@ class CoffeeShopApp:
         customerEntry.grid(
             row=0,
             column=0,
+            padx=5,
+            pady=5,
         )
 
         addCustomerButton = Button(
@@ -59,6 +47,8 @@ class CoffeeShopApp:
         addCustomerButton.grid(
             row=0,
             column=1,
+            padx=5,
+            pady=5,
         )
 
         numCustomers = self.coffeeShop.getNumCustomers()
@@ -71,6 +61,8 @@ class CoffeeShopApp:
             customerLabel.grid(
                 row=i+1,
                 column=0,
+                padx=5,
+                pady=5,
             )
             self.customerWidgets.append(customerLabel)
 
@@ -82,6 +74,8 @@ class CoffeeShopApp:
             removeCustomerButton.grid(
                 row=i+1,
                 column=1,
+                padx=5,
+                pady=5,
             )
             self.customerWidgets.append(removeCustomerButton)
 
@@ -89,6 +83,7 @@ class CoffeeShopApp:
         name = self.newCustomerName.get()
         self.coffeeShop.addCustomer(name)
         self.createWidgets()
+        self.newCustomerName.set("")  # Clear the entry box
 
     def removeCustomer(self, index):
         self.coffeeShop.removeCustomerAt(index)
