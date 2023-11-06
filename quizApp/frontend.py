@@ -129,6 +129,7 @@ class QuizApp:
     def deleteAllQuestionWidgets(self):
         for widget in self.questionWidgets:
             widget.destroy()
+        self.questionWidgets = []
 
 
 def main():
