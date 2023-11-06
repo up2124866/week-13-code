@@ -33,11 +33,14 @@ class CoffeeShopApp:
 
         self.newCustomerName = StringVar()
 
+        self.customerWidgets = []
+
     def run(self):
         self.createWidgets()
         self.win.mainloop()
 
     def createWidgets(self):
+        self.deleteAllCustomerWidgets()
         customerEntry = Entry(
             self.mainFrame,
             textvariable=self.newCustomerName
@@ -56,7 +59,6 @@ class CoffeeShopApp:
             row=0,
             column=1,
         )
-
         numCustomers = self.coffeeShop.getNumCustomers()
         for i in range(numCustomers):
             customer = self.coffeeShop.getCustomerAt(i)
@@ -68,11 +70,32 @@ class CoffeeShopApp:
                 row=i+1,
                 column=0,
             )
+            self.customerWidgets.append(customerLabel)
+
+            removeCustomerButton = Button(
+                self.mainFrame,
+                text="Remove",
+                command=lambda index=i: self.removeCustomer(index)
+            )
+            removeCustomerButton.grid(
+                row=i+1,
+                column=1,
+            )
+            self.customerWidgets.append(removeCustomerButton)
 
     def addCustomer(self):
         name = self.newCustomerName.get()
         self.coffeeShop.addCustomer(name)
         self.createWidgets()
+
+    def removeCustomer(self, index):
+        self.coffeeShop.removeCustomerAt(index)
+        self.createWidgets()
+
+    def deleteAllCustomerWidgets(self):
+        for widget in self.customerWidgets:
+            widget.destroy() # destroy() is a method of the Widget class
+        self.customerWidgets = [] # reset the list
 
 
 def main():

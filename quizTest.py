@@ -49,11 +49,15 @@ class QuizApp:
         self.newQuestion.set("Enter question here")
         self.newAnswer.set("Enter answer here")
 
+        self.questionWidgets = []
+
     def run(self):
         self.createWidgets()
         self.win.mainloop()
 
     def createWidgets(self):
+        self.deleteAllQuestionWidgets()
+
         questionEntry = Entry(
             self.mainFrame,
             textvariable=self.newQuestion,
@@ -102,6 +106,7 @@ class QuizApp:
                 pady=5
             )
             questionLabel.grid(row=i+1, column=0)
+            self.questionWidgets.append(questionLabel)
 
             userAnswer = Entry(self.mainFrame)
             userAnswer.grid(
@@ -110,12 +115,35 @@ class QuizApp:
                 padx=5,
                 pady=5
             )
+            self.questionWidgets.append(userAnswer)
+
+            removeQuestionButton = Button(
+                self.mainFrame,
+                text="Remove",
+                command=lambda index=i: self.removeQuestion(index)
+            )
+            removeQuestionButton.grid(
+                row=i+1,
+                column=2,
+                padx=5,
+                pady=5
+            )
+            self.questionWidgets.append(removeQuestionButton)
 
     def addQuestion(self):
         question = self.newQuestion.get()
         answer = self.newAnswer.get()
         self.quiz.addQuestion(question, answer)
         self.createWidgets()
+
+    def removeQuestion(self, index):
+        self.quiz.removeQuestionAt(index)
+        self.createWidgets()
+
+    def deleteAllQuestionWidgets(self):
+        for widget in self.questionWidgets:
+            widget.destroy()
+        self.questionWidgets = []
 
 
 def main():
