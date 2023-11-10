@@ -23,11 +23,11 @@ class App:
         updateButton = Button(
             self.win,
             text="Update number",
-            command=lambda: self.createNewWindow(numberLabel)
+            command=lambda: self.createNewWin(numberLabel)
         )
         updateButton.pack()
 
-    def createNewWindow(self, numberLabel):
+    def createNewWin(self, numberLabel):
         newWin = Toplevel(self.win)
         newWin.title("Update number")
 
