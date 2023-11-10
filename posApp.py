@@ -50,7 +50,7 @@ class PosApp:
         )
         addButton.pack()
 
-    def updateBill(self, totalLabel, newWindow):
+    def updateBill(self, totalLabel, newWin):
         newTotal = self.total.get() + self.newItemPrice.get()
         self.total.set(newTotal) # Update the total (this does not update the label)
         self.newItemPrice.set(0.00) # Reset the entry box for the new item
@@ -58,7 +58,7 @@ class PosApp:
             text=f"Total Bill: £{self.total.get():.2f}")
         # Without the config line, the totalLabel will not update
 
-        newWindow.destroy()
+        newWin.destroy()
 
 
 def main():
