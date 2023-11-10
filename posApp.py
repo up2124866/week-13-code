@@ -6,6 +6,9 @@ class PosApp:
         self.win = Tk()
         self.win.title("POS System")
 
+        self.mainFrame = Frame(self.win)
+        self.mainFrame.pack(padx=10, pady=10)
+
         self.total = DoubleVar()
         self.total.set(0.00)
 
@@ -17,43 +20,47 @@ class PosApp:
 
     def createWidgets(self):
         totalLabel = Label(
-            self.win,
+            self.mainFrame,
             text=f"Total Bill: £{self.total.get():.2f}"
         )
-        totalLabel.pack()
+        totalLabel.pack(padx=5, pady=5)
 
         addItemButton = Button(
-            self.win,
+            self.mainFrame,
             text="Add Item",
             command=lambda: self.createNewWin(totalLabel)
         )
-        addItemButton.pack()
+        addItemButton.pack(padx=5, pady=5)
 
     def createNewWin(self, totalLabel):
         newWin = Toplevel(self.win)
         newWin.title("Add Item to Bill")
 
-        itemPriceLabel = Label(newWin, text="Item Price (£):")
-        itemPriceLabel.pack()
+        newWinFrame = Frame(newWin)
+        newWinFrame.pack(padx=10, pady=10)
+
+        itemPriceLabel = Label(newWinFrame, text="Item Price (£):")
+        itemPriceLabel.pack(padx=5, pady=5)
 
         itemPriceEntry = Entry(
-            newWin,
+            newWinFrame,
             textvariable=self.newItemPrice
         )
-        itemPriceEntry.pack()
+        itemPriceEntry.pack(padx=5, pady=5)
 
         addButton = Button(
-            newWin,
+            newWinFrame,
             text="Add to Bill",
             command=lambda: self.updateBill(
                 totalLabel, newWin)
         )
-        addButton.pack()
+        addButton.pack(padx=5, pady=5)
 
     def updateBill(self, totalLabel, newWin):
         newTotal = self.total.get() + self.newItemPrice.get()
-        self.total.set(newTotal) # Update the total (this does not update the label)
-        self.newItemPrice.set(0.00) # Reset the entry box for the new item
+        # Update the total (this does not update the label)
+        self.total.set(newTotal)
+        self.newItemPrice.set(0.00)  # Reset the entry box for the new item
         totalLabel.config(
             text=f"Total Bill: £{self.total.get():.2f}")
         # Without the config line, the totalLabel will not update
@@ -64,6 +71,3 @@ class PosApp:
 def main():
     app = PosApp()
     app.run()
-
-
-main()
