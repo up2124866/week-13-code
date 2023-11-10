@@ -28,25 +28,25 @@ class App:
         updateButton.pack()
 
     def createNewWindow(self, numberLabel):
-        newWindow = Toplevel(self.win)
-        newWindow.title("Update number")
+        newWin = Toplevel(self.win)
+        newWin.title("Update number")
 
         newNumEntry = Entry(
-            newWindow,
+            newWin,
             textvariable=self.num
         )
         newNumEntry.pack()
 
         newNumButton = Button(
-            newWindow,
+            newWin,
             text="Update number",
-            command=lambda: self.updateNum(numberLabel, newWindow)
+            command=lambda: self.updateNum(numberLabel, newWin)
         )
         newNumButton.pack()
 
-    def updateNum(self, numberLabel, newWindow):
+    def updateNum(self, numberLabel, newWin):
         numberLabel.config(text=f"Number: {self.num.get()}")
-        newWindow.destroy()
+        newWin.destroy()
 
 
 def main():
