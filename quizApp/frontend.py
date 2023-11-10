@@ -139,6 +139,3 @@ def main():
 
     app = QuizApp(quiz)
     app.run()
-
-
-main()

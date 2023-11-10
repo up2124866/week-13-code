@@ -106,6 +106,3 @@ def main():
 
     app = CoffeeShopApp(coffeeShop)
     app.run()
-
-
-main()
