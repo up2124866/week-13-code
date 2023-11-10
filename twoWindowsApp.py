@@ -5,7 +5,10 @@ class App:
     def __init__(self):
         self.win = Tk()
         self.win.title("Main Window")
-        
+
+        self.mainFrame = Frame(self.win)
+        self.mainFrame.pack(padx=10, pady=10)
+
         self.num = IntVar()
         self.num.set(12)
 
@@ -15,43 +18,44 @@ class App:
 
     def createWidgets(self):
         numberLabel = Label(
-            self.win,
+            self.mainFrame,
             text=f"Number: {self.num.get()}"
         )
-        numberLabel.pack()
+        numberLabel.pack(padx=5, pady=5)
 
         updateButton = Button(
-            self.win,
+            self.mainFrame,
             text="Update number",
             command=lambda: self.createNewWin(numberLabel)
         )
-        updateButton.pack()
+        updateButton.pack(padx=5, pady=5)
 
     def createNewWin(self, numberLabel):
         newWin = Toplevel(self.win)
         newWin.title("Update number")
 
+        newWinFrame = Frame(newWin)
+        newWinFrame.pack(padx=10, pady=10)
+
         newNumEntry = Entry(
-            newWin,
+            newWinFrame,
             textvariable=self.num
         )
-        newNumEntry.pack()
+        newNumEntry.pack(padx=5, pady=5)
 
         newNumButton = Button(
-            newWin,
+            newWinFrame,
             text="Update number",
             command=lambda: self.updateNum(numberLabel, newWin)
         )
-        newNumButton.pack()
+        newNumButton.pack(padx=5, pady=5)
 
     def updateNum(self, numberLabel, newWin):
         numberLabel.config(text=f"Number: {self.num.get()}")
+        self.num.set(0)
         newWin.destroy()
 
 
 def main():
     app = App()
     app.run()
-
-
-main()
