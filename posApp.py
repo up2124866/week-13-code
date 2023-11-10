@@ -3,8 +3,8 @@ from tkinter import *
 
 class PosApp:
     def __init__(self):
-        self.mainWindow = Tk()
-        self.mainWindow.title("POS System")
+        self.win = Tk()
+        self.win.title("POS System")
 
         self.total = DoubleVar()
         self.total.set(0.00)
@@ -13,40 +13,40 @@ class PosApp:
 
     def run(self):
         self.createWidgets()
-        self.mainWindow.mainloop()
+        self.win.mainloop()
 
     def createWidgets(self):
         totalLabel = Label(
-            self.mainWindow,
+            self.win,
             text=f"Total Bill: £{self.total.get():.2f}"
         )
         totalLabel.pack()
 
         addItemButton = Button(
-            self.mainWindow,
+            self.win,
             text="Add Item",
-            command=lambda: self.createNewWindow(totalLabel)
+            command=lambda: self.createNewWin(totalLabel)
         )
         addItemButton.pack()
 
-    def createNewWindow(self, totalLabel):
-        newWindow = Toplevel(self.mainWindow)
-        newWindow.title("Add Item to Bill")
+    def createNewWin(self, totalLabel):
+        newWin = Toplevel(self.win)
+        newWin.title("Add Item to Bill")
 
-        itemPriceLabel = Label(newWindow, text="Item Price (£):")
+        itemPriceLabel = Label(newWin, text="Item Price (£):")
         itemPriceLabel.pack()
 
         itemPriceEntry = Entry(
-            newWindow,
+            newWin,
             textvariable=self.newItemPrice
         )
         itemPriceEntry.pack()
 
         addButton = Button(
-            newWindow,
+            newWin,
             text="Add to Bill",
             command=lambda: self.updateBill(
-                totalLabel, newWindow)
+                totalLabel, newWin)
         )
         addButton.pack()
 
