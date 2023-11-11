@@ -6,6 +6,7 @@ A repository containing the examples from the worksheet and lecture.
 - `coffeeShopApp` - A folder containing the coffee shop queue management app (from the lecture).
 - `quizApp` - A folder containing the quiz app (from the worksheet).
 - `twoWindowApp.py` - A simple app with two windows (from the lecture).
+- `todoListApp` - A folder containing the todo list app (exercise from the worksheet).
 - `posApp.py` - A simple point-of-sale app (from the workshop).
 - `README.md` - This file.
 - `.gitignore` - A file telling git to ignore certain files (e.g. `.pyc` files).
