@@ -83,15 +83,6 @@ class QuizApp:
             )
             self.questionWidgets.append(userAnswer)
 
-            checkButton = Button(
-                self.mainFrame,
-                text="Check",
-                command=lambda i=i, userAnswer=userAnswer: self.checkAnswer(
-                    i, userAnswer)
-            )
-            checkButton.grid(row=i+1, column=2)
-            self.questionWidgets.append(checkButton)
-
             removeQuestionButton = Button(
                 self.mainFrame,
                 text="Remove",
@@ -99,7 +90,7 @@ class QuizApp:
             )
             removeQuestionButton.grid(
                 row=i+1,
-                column=3,
+                column=2,
                 padx=5,
                 pady=5
             )
@@ -113,14 +104,6 @@ class QuizApp:
         self.newQuestion.set("Enter question here")
         self.newAnswer.set("Enter answer here")
         self.createWidgets()
-
-    def checkAnswer(self, index, userAnswer):
-        answer = userAnswer.get()
-        correct = self.quiz.checkAnswerAt(index, answer)
-        if correct:
-            userAnswer.configure(bg="green")
-        else:
-            userAnswer.configure(bg="red")
 
     def removeQuestion(self, index):
         self.quiz.removeQuestionAt(index)
