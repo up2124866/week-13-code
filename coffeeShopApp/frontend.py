@@ -92,9 +92,7 @@ class CoffeeShopApp:
     def deleteAllCustomerWidgets(self):
         for widget in self.customerWidgets:
             widget.destroy()
-        # Alternatively, we could do this:
-        # for widget in self.mainFrame.winfo_children():
-        #     widget.destroy()
+        self.customerWidgets = []
 
 
 def main():
