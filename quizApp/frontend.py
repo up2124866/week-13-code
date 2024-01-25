@@ -3,6 +3,7 @@ from backend import Quiz
 
 
 class QuizApp:
+    
     def __init__(self, quiz):
         self.quiz = quiz
 

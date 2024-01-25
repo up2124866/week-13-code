@@ -1,4 +1,5 @@
-class Task():
+class Task:
+
     def __init__(self, msg):
         self.msg = msg
 
@@ -10,7 +11,8 @@ class Task():
             self.msg = msg
 
 
-class TaskList():
+class TaskList:
+
     def __init__(self):
         self.tasks = []
 
