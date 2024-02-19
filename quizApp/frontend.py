@@ -86,12 +86,11 @@ class QuizApp:
             )
             self.questionWidgets.append(self.userAnswer)
 
-            checkAnswer = lambda index, userAnswer: self.checkAnswerAtIndex(index, userAnswer)
-
+            
             checkAnswersButton = Button(
                 self.mainFrame,
                 text="Check",
-                command=checkAnswer(i, self.questionWidgets[(i*2)-1])
+                command=lambda index=i: self.checkAnswerAtIndex(index, self.questionWidgets[(4*index)+1].get())
             )
             checkAnswersButton.grid(
                 row=i+1,
@@ -99,6 +98,7 @@ class QuizApp:
                 padx=5,
                 pady=5
             )
+            self.questionWidgets.append(checkAnswersButton)
 
             removeQuestionButton = Button(
                 self.mainFrame,
@@ -120,7 +120,7 @@ class QuizApp:
 
         self.newQuestion.set("Enter question here")
         self.newAnswer.set("Enter answer here")
-        self.createWidgets()
+        self.createWidgets()        
 
     def removeQuestion(self, index):
         self.quiz.removeQuestionAt(index)
@@ -133,9 +133,10 @@ class QuizApp:
     
     def checkAnswerAtIndex(self, index, userAnswer):
         if self.quiz.checkAnswerAt(index, userAnswer):
-            self.userAnswer.configure(fg="green")
+            self.questionWidgets[(4*index)+1].configure(fg="green")
         else:
-            self.userAnswer.configure(fg="red")
+            self.questionWidgets[(4*index)+1].configure(fg="red")
+
 
 
 def main():
