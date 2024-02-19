@@ -80,6 +80,9 @@ class CoffeeShopApp:
             )
             self.customerWidgets.append(removeCustomerButton)
 
+        if self.coffeeShop.getNumCustomers() >= self.coffeeShop.getCustomerLimit():
+            addCustomerButton.configure(state="disabled")
+
     def addCustomer(self):
         name = self.newCustomerName.get()
         self.coffeeShop.addCustomer(name)
@@ -97,7 +100,7 @@ class CoffeeShopApp:
 
 
 def main():
-    coffeeShop = CoffeeShop()
+    coffeeShop = CoffeeShop(5)
 
     coffeeShop.addCustomer("Alice")
     coffeeShop.addCustomer("Bob")
@@ -105,3 +108,5 @@ def main():
 
     app = CoffeeShopApp(coffeeShop)
     app.run()
+
+main()

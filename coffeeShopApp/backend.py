@@ -1,10 +1,12 @@
 class CoffeeShop:
     
-    def __init__(self):
+    def __init__(self, customerLimit):
+        self.customerLimit = customerLimit
         self.customers = []
 
     def addCustomer(self, name):
-        self.customers.append(name)
+        if len(self.customers) < self.customerLimit:
+            self.customers.append(name)
 
     def removeCustomerAt(self, index):
         del self.customers[index]
@@ -14,3 +16,6 @@ class CoffeeShop:
 
     def getNumCustomers(self):
         return len(self.customers)
+    
+    def getCustomerLimit(self):
+        return self.customerLimit
