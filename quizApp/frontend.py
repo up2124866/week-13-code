@@ -58,7 +58,7 @@ class QuizApp:
         )
         addQuestionButton.grid(
             row=0,
-            column=2,
+            column=3,
             padx=5,
             pady=5
         )
@@ -75,14 +75,30 @@ class QuizApp:
             questionLabel.grid(row=i+1, column=0)
             self.questionWidgets.append(questionLabel)
 
-            userAnswer = Entry(self.mainFrame)
-            userAnswer.grid(
+            self.userAnswer = Entry(
+                self.mainFrame
+            )
+            self.userAnswer.grid(
                 row=i+1,
                 column=1,
                 padx=5,
                 pady=5
             )
-            self.questionWidgets.append(userAnswer)
+            self.questionWidgets.append(self.userAnswer)
+
+            checkAnswer = lambda index, userAnswer: self.checkAnswerAtIndex(index, userAnswer)
+
+            checkAnswersButton = Button(
+                self.mainFrame,
+                text="Check",
+                command=checkAnswer(i, self.questionWidgets[(i*2)-1])
+            )
+            checkAnswersButton.grid(
+                row=i+1,
+                column=2,
+                padx=5,
+                pady=5
+            )
 
             removeQuestionButton = Button(
                 self.mainFrame,
@@ -91,7 +107,7 @@ class QuizApp:
             )
             removeQuestionButton.grid(
                 row=i+1,
-                column=2,
+                column=3,
                 padx=5,
                 pady=5
             )
@@ -114,6 +130,12 @@ class QuizApp:
         for widget in self.questionWidgets:
             widget.destroy()
         self.questionWidgets = []
+    
+    def checkAnswerAtIndex(self, index, userAnswer):
+        if self.quiz.checkAnswerAt(index, userAnswer):
+            self.userAnswer.configure(fg="green")
+        else:
+            self.userAnswer.configure(fg="red")
 
 
 def main():
@@ -123,3 +145,4 @@ def main():
 
     app = QuizApp(quiz)
     app.run()
+main()
